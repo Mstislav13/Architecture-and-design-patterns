@@ -1,0 +1,1 @@
+{'your_name': 'Ivan Petrov', 'your_email': 'Ivan@gmail.com', 'your_enquiry': '2021 sees the redesign of our website. Take a look around and let us know what you think.', 'contact_submitted': 'submit'}
