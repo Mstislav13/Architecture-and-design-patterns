@@ -1,12 +1,11 @@
 from datetime import date
-from views.views import Index, About, Contact
+from views.views import Index, About, Contacts
 
 routes = {
     '/': Index(),
     '/about/': About(),
-    '/contact/': Contact(),
+    '/contacts/': Contacts(),
 }
-
 
 # front controller(Контроллер запросов)
 def date_front(request):
@@ -23,6 +22,5 @@ def another_front(request):
     :return: 
     """
     request['something'] = 'something'
-
 
 fronts = [date_front, another_front]

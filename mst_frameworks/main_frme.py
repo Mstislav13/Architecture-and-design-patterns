@@ -4,14 +4,17 @@ from quopri import decodestring # Декодирует содержимое фа
 from mst_frameworks.requests import Get, Post
 
 
-class MainFramework:
-    """
-    Класс MainFramework база для фреймворка
-    """
+class Page_404:
+    def __call__(self, request):
+        return '404 WHAT', '404 Page not Fоund'
 
-    def __init__(self, route_obj, front_obj):
-        self.route_list = route_obj
-        self.front_list = front_obj
+
+class MainFramework:
+    """Класс MainFramework - основа фреймворка"""
+
+    def __init__(self, routes_obj, fronts_obj):
+        self.routes_lst = routes_obj
+        self.fronts_lst = fronts_obj
 
     def __call__(self, environ, start_response):
         # Получаем адрес(путь), по которому выполнен переход
@@ -28,28 +31,27 @@ class MainFramework:
         request['method'] = data_request
 
         if data_request == 'POST':
-            data = Post().request_params(environ)
+            data = Post().req_params(environ)
             request['data'] = MainFramework.decode(data)
-            print(f'Пришел POST-запрос: {MainFramework.decode(data)}')
+            print('Пришел POST-запрос:', MainFramework.decode(data))
             with open('new_file.txt', 'w', encoding='utf-8') as f:
                 f.write(f'{MainFramework.decode(data)}')
         if data_request == 'GET':
-            request_params = Get().request_params(environ)
+            request_params = Get().req_params(environ)
             request['request_params'] = MainFramework.decode(request_params)
-            print(f'Пришли GET-параметры:'
-                  f' {MainFramework.decode(request_params)}')
+            print('Пришли GET-параметры:', MainFramework.decode(request_params))
 
         # Отработка паттерна page-controller
         # Находим нужный контроллер(view)
-        if addr in self.route_list:
-            view = self.route_list[addr]
+        if addr in self.routes_lst:
+            view = self.routes_lst[addr]
         else:
             view = Page_404()
-        
+
         # Отработка паттерна front-controller
         # Наполняем словарь request элементами
         # Словарь получает все контроллеры(view)
-        for front in self.front_list:
+        for front in self.fronts_lst:
             front(request)
         # Запуск контроллера(view) с передачей объекта request
         code, body = view(request)
@@ -64,12 +66,7 @@ class MainFramework:
         """
         new_value = {}
         for key, value in data.items():
-            item = bytes(value.replace('%', '=').replace("+", " "), 'UTF-8')
-            decode_str = decodestring(item).decode('UTF-8')
+            item = bytes(value.replace('%', '=').replace('+', ' '), 'utf-8')
+            decode_str = decodestring(item).decode('utf-8')
             new_value[key] = decode_str
         return new_value
-
-
-class Page_404:
-    def __call__(self, request):
-        return '404 - Page not found'
