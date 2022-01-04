@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="website description" />
+    <meta name="keywords" content="website keywords, website keywords" />
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+    <title>{% block title %}Шаблон_horizon{% endblock %}</title>
+    {% block style %}
+    {% include "includes/include_style.html" %}
+    {% endblock %}
+</head>
+
+<body>
+    <div id="main">
+        {% block header %}
+        {% include "includes/include_header.html" %}
+        {% endblock %}
+
+        <div id="content_header"></div>
+
+        <div id="site_content">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <div id="content_footer"></div>
+
+        {% block footer %}
+        {% include "includes/include_footer.html" %}
+        {% endblock %}
+    </div>
+</body>
+
+</html>

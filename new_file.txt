@@ -1,1 +1,4 @@
-{'your_name': 'Petr', 'your_email': 'Ivan@gmail.com', 'your_enquiry': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit', 'contact_submitted': 'submit'}
+{'your_name': 'Petr', 'your_email': 'Ivan@gmail.com', 'your_enquiry': '2021 sees the redesign of our website. Take a look around and let us know what you think.', 'contact_submitted': 'submit'}
+{'your_name': 'Fedor', 'your_email': 'itr@fgfd,g.com', 'your_enquiry': 'Привет. ловдылаолдаоывждлождп', 'contact_submitted': 'submit'}
+{'your_name': 'Иван Петров', 'your_email': 'erf@vjf.com', 'your_enquiry': 'Hlkldsf,d.lcijfdsf', 'contact_submitted': 'submit'}
+{'your_name': 'Игнат', 'your_email': 'rgft@ksldff.ru', 'your_enquiry': '2021 Взгляните на редизайн нашего сайта. Ознакомьтесь и дайте нам знать, что вы думаете.', 'contact_submitted': 'submit'}

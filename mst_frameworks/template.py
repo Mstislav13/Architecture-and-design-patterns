@@ -1,18 +1,21 @@
-from os.path import join
-from jinja2 import Template
-
+from jinja2 import FileSystemLoader
+from jinja2.environment import Environment
 
 def open_template(template_name, folder='templates', **kwargs):
     """
+    Минимальный пример работы с шаблонизатором
     :param template_name: имя шаблона
     :param folder: папка с шаблоном
     :param kwargs: параметры
     :return:
     """
-    path_to_file = join(folder, template_name)
+    # Создаем объект окружения
+    env = Environment()
 
-    with open(path_to_file, encoding='utf-8') as file:
-        temp_file = Template(file.read())
+    # Указываем папку для поиска шаблонов
+    env.loader = FileSystemLoader(folder)
 
-    return temp_file.render(**kwargs)
+    # Находим шаблон в окружении
+    template = env.get_template(template_name)
+    return template.render(**kwargs)
     

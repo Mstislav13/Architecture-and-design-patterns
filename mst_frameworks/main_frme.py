@@ -34,8 +34,8 @@ class MainFramework:
             data = Post().req_params(environ)
             request['data'] = MainFramework.decode(data)
             print('Пришел POST-запрос:', MainFramework.decode(data))
-            with open('new_file.txt', 'w', encoding='utf-8') as f:
-                f.write(f'{MainFramework.decode(data)}')
+            with open('new_file.txt', 'a', encoding='utf-8') as f:
+                f.write(f'{MainFramework.decode(data)}'+'\n')
         if data_request == 'GET':
             request_params = Get().req_params(environ)
             request['request_params'] = MainFramework.decode(request_params)
