@@ -1,0 +1,17 @@
+<div id="content">
+    <a href="/">назад</a>
+
+    <h1>Список категорий</h1>
+    <ul>
+        {% for item in objects_list %}
+        <li>
+            {{item.name}} <span>Количество курсов: {{item.course_count()}}</span>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <div>
+        <li><a href="/my_course_list/">Список курсов</a></li>
+        <li><a href="/create_my_course/">Создать курс</a></li>
+    </div>
+</div>
