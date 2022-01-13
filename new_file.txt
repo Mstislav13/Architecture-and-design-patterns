@@ -1,0 +1,46 @@
+{'your_name': 'Petr', 'your_email': 'Ivan@gmail.com', 'your_enquiry': '2021 sees the redesign of our website. Take a look around and let us know what you think.', 'contact_submitted': 'submit'}
+{'your_name': 'Fedor', 'your_email': 'itr@fgfd,g.com', 'your_enquiry': 'Привет. ловдылаолдаоывждлождп', 'contact_submitted': 'submit'}
+{'your_name': 'Иван Петров', 'your_email': 'erf@vjf.com', 'your_enquiry': 'Hlkldsf,d.lcijfdsf', 'contact_submitted': 'submit'}
+{'your_name': 'Игнат', 'your_email': 'rgft@ksldff.ru', 'your_enquiry': '2021 Взгляните на редизайн нашего сайта. Ознакомьтесь и дайте нам знать, что вы думаете.', 'contact_submitted': 'submit'}
+{'name': 'some coursesss'}
+{'name': 'some coursesss'}
+{'name': 'gggg'}
+{'name': 'some categoryyyy'}
+{'name': 'coursesssss'}
+{'name': ''}
+{'name': '123'}
+{'name': 'Стулья'}
+{'name': 'Люстра'}
+{'name': 'Стулья'}
+{'name': '123'}
+{'name': '123'}
+{'name': '123'}
+{'name': 'Стулья'}
+{'name': 'Люстра'}
+{'name': 'Ваза'}
+{'name': 'Стулья'}
+{'name': 'Люстра'}
+{'name': 'Стулья'}
+{'name': '123'}
+{'name': 'Ваза'}
+{'name': 'Стулья'}
+{'name': 'Люстра'}
+{'name': 'Стулья'}
+{'name': 'Ваза'}
+{'name': 'Стулья'}
+{'name': 'Стулья'}
+{'name': 'Стулья'}
+{'name': 'Стулья'}
+{'name': 'Стулья'}
+{'name': 'Стулья'}
+{'name': 'Стулья'}
+{'name': 'Стулья'}
+{'name': '123'}
+{'name': 'Стулья'}
+{'name': '123'}
+{'name': 'Люстра'}
+{'name': 'Стулья'}
+{'name': 'Люстра'}
+{'name': 'Стулья'}
+{'name': 'kukaracha'}
+{'name': 'Ваза'}

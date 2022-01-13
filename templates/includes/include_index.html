@@ -1,0 +1,17 @@
+<div id="content">    
+    <h1>Добро пожаловать !</h1>
+    <h2>Мы хотим предложить вам выбрать наши продукты</h2>
+
+    <div>
+		<h2><a href="/category_create/">Создать новую категорию:</a></h2>
+	</div>
+	<div>
+		<h1>Список существующих категорий:</h1>
+        {% for item in objects_list %}
+        <li>
+            <h4><span>Категория: {{item.name}}. Количество курсов: {{item.course_count()}}</span></h4>
+			<h2><a href="/my_course_list/?id={{item.id}}">Показать курсы</a></h2>
+        </li>
+        {% endfor %}
+	</div>    
+</div>
