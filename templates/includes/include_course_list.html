@@ -1,0 +1,18 @@
+<div id="content">
+    <div>
+        </h2><a href="/">назад на главную</a>
+    </div>
+    
+    <br>
+
+    <div>
+        <h2><a href="/create_my_course/?id={{id}}">Создать новый курс</a></h2>
+        
+        <h1>Список курсов для категории "{{name}}"</h1>
+        {% for item in objects_list %}
+        <li>
+            {{item.name}} <span><a href="/course_copy/?name={{item.name}}">скопировать</a></span>
+        </li>
+        {% endfor %}
+    </div>
+</div>
