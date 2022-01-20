@@ -1,41 +1,82 @@
 from datetime import date
 from mst_frameworks.template import open_template
 from patterns.create_patterns import Engine, Logger
+from patterns.structur_patterns import MyRouter, Debug
 
 site_page = Engine()
 logger = Logger('main')
 
+routes = {}
 
-# Контроллер - главная страница
+
+@MyRouter(routes=routes, url='/')
 class Index:
+    """
+    Контроллер - главная страница
+    """
+    @Debug(name='Index')
     def __call__(self, request):
+        """
+        :param request:
+        :return:
+        """
         return '200 OK', open_template('index.html', 
                                     objects_list=site_page.categories)
 
 
-# Контроллер "О проекте"
+@MyRouter(routes=routes, url='/about/')
 class About:
+    """
+    Контроллер "О проекте"
+    """
+    @Debug(name='About')
     def __call__(self, request):
+        """
+        :param request:
+        :return:
+        """
         return '200 OK', open_template('about.html', date=date.today())
 
 
-# Контроллер "Контакты"
+@MyRouter(routes=routes, url='/contacts/')
 class Contacts:
+    """
+    Контроллер "Контакты"
+    """
+    @Debug(name='Contacts')
     def __call__(self, request):
+        """
+        :param request:
+        :return:
+        """
         return '200 OK', open_template('contacts.html')
 
 
-# Контроллер "Eggog - 404"
 class NotFound:
+    """
+    Контроллер "Eggog - 404"
+    """
+    @Debug(name='NotFound')
     def __call__(self, request):
+        """
+        :param request:
+        :return:
+        """
         return '404 WHAT', '404 PAGE Not Found'
 
 
-# Контроллер 'Создание курса'
+@MyRouter(routes=routes, url='/create_my_course/')
 class CreateMyCourse:
+    """
+    Контроллер 'Создание курса'
+    """
     cat_id = -1
 
     def __call__(self, request):
+        """
+        :param request:
+        :return:
+        """
         if request['method'] == 'POST':
             # Метод 'POST'
             data = request['data']
@@ -62,9 +103,16 @@ class CreateMyCourse:
                 return '200 OK', 'Категории еще не добавлены'
 
 
-# Контроллер 'Создание категории'
+@MyRouter(routes=routes, url='/category_create/')
 class CategoryCreator:
+    """
+    Контроллер 'Создание категории'
+    """
     def __call__(self, request):
+        """
+        :param request:
+        :return:
+        """
         if request['method'] == 'POST':
             # Метод 'POST'
             data = request['data']
@@ -86,9 +134,16 @@ class CategoryCreator:
                                             categories=categories)
 
 
-# Контроллер 'Список курсов'
+@MyRouter(routes=routes, url='/my_course_list/')
 class MyCourseList:
+    """
+    Контроллер 'Список курсов'
+    """
     def __call__(self, request):
+        """
+        :param request:
+        :return:
+        """
         logger.log('Список курсов')
         try:
             item = site_page.find_category_id(
@@ -101,17 +156,31 @@ class MyCourseList:
             return '200 OK', 'Курсы еще не добавлены'
 
 
-# Контроллер 'Список категорий'
+@MyRouter(routes=routes, url='/my_category_list/')
 class MyCategoryList:
+    """
+    Контроллер 'Список категорий'
+    """
     def __call__(self, request):
+        """
+        :param request:
+        :return:
+        """
         logger.log('Список категорий')
         return '200 OK', open_template('category_list.html',
                                         objects_list=site_page.categories)
 
 
-# Контроллер 'Копирование курса'
+@MyRouter(routes=routes, url='/course_copy/')
 class CourseCopy:
+    """
+    Контроллер 'Копирование курса'
+    """
     def __call__(self, request):
+        """
+        :param request:
+        :return:
+        """
         req_params = request['request_params']
 
         try:

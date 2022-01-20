@@ -1,6 +1,4 @@
-from quopri import decodestring # Декодирует содержимое файла input.
-                                # Принимает источник bytes и возвращает 
-                                # соответствующий декодированный bytes.
+import quopri
 from mst_frameworks.requests import Get, Post
 
 
@@ -67,6 +65,54 @@ class MainFramework:
         new_value = {}
         for key, value in data.items():
             item = bytes(value.replace('%', '=').replace('+', ' '), 'utf-8')
-            decode_str = decodestring(item).decode('utf-8')
+            decode_str = quopri.decodestring(item).decode('utf-8')
             new_value[key] = decode_str
         return new_value
+
+
+# Новый вид WSGI-application.
+# Первый — логирующий (такой же, как основной,
+# только для каждого запроса выводит информацию
+# (тип запроса и параметры) в консоль.
+class DebugApplication(MainFramework):
+
+    def __init__(self, routes_obj, fronts_obj):
+        """
+        :param routes_obj:
+        :param fronts_obj:
+        """
+        self.application = MainFramework(routes_obj, fronts_obj)
+        super().__init__(routes_obj, fronts_obj)
+
+    def __call__(self, env, start_response):
+        """
+        :param env:
+        :param start_response:
+        :return:
+        """
+        print('DEBUG MODE')
+        print(env)
+        return self.application(env, start_response)
+
+
+# Новый вид WSGI-application.
+# Второй — фейковый (на все запросы пользователя отвечает:
+# 200 OK, Hello from Fake).
+class FakeApplication(MainFramework):
+
+    def __init__(self, routes_obj, fronts_obj):
+        """
+        :param routes_obj:
+        :param fronts_obj:
+        """
+        self.application = MainFramework(routes_obj, fronts_obj)
+        super().__init__(routes_obj, fronts_obj)
+
+    def __call__(self, env, start_response):
+        """
+        :param env:
+        :param start_response:
+        :return:
+        """
+        start_response('200 OK', [('Content-Type', 'text/html')])
+        return [b'Hello from Fake']

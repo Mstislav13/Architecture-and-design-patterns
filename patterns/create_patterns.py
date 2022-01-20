@@ -1,5 +1,5 @@
-from copy import deepcopy
-from quopri import decodestring
+import copy
+import quopri
 
 
 class Human:
@@ -47,7 +47,7 @@ class Prototype:
     Класс - Прототип курсов обучения
     """
     def clone(self):
-        return deepcopy(self)
+        return copy.deepcopy(self)
 
 
 class MiCourse(Prototype):
@@ -183,7 +183,7 @@ class Engine:
         :return:
         """
         val_b = bytes(val.replace('%', '=').replace("+", " "), 'UTF-8')
-        val_decode_str = decodestring(val_b)
+        val_decode_str = quopri.decodestring(val_b)
         return val_decode_str.decode('UTF-8')
 
 

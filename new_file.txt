@@ -44,3 +44,18 @@
 {'name': 'Стулья'}
 {'name': 'kukaracha'}
 {'name': 'Ваза'}
+{'name': 'Стулья'}
+{'name': 'Люстра'}
+{'your_name': 'yyyyy', 'your_email': 'uuuu@mail.com', 'your_enquiry': 'tytytytytytytyty', 'contact_submitted': 'submit'}
+{'name': 'button'}
+{'name': 'button'}
+{'your_name': 'yyyyy', 'your_email': 'uuuu@mail.com', 'your_enquiry': 'tytytytytytytyty', 'contact_submitted': 'submit'}
+{'name': 'Стулья'}
+{'name': 'Ваза'}
+{'name': '123'}
+{'name': 'Ваза'}
+{'name': 'Ваза'}
+{'name': '123'}
+{'name': 'Стулья'}
+{'name': 'Ваза'}
+{'search_field': 'Ваза', 'search.x': '0', 'search.y': '0'}
