@@ -59,3 +59,109 @@
 {'name': 'Стулья'}
 {'name': 'Ваза'}
 {'search_field': 'Ваза', 'search.x': '0', 'search.y': '0'}
+{'name': 'Стулья'}
+{'name': 'Люстра'}
+{'name': 'qwerty'}
+{'name': 'фыва'}
+{'name': 'олдж'}
+{'name': 'zxcv'}
+{'name': 'Стулья'}
+{'name': 'Люстра'}
+{'name': 'Ваза'}
+{'name': 'qwerty'}
+{'name': 'asdfg'}
+{'name': 'zxcvbn'}
+{'name': 'tyuio'}
+{'name': 'ghjkl'}
+{'name': 'bnm,.'}
+{'name': 'kukaracha'}
+{'name': 'RRRSSSXXX'}
+{'course_name': 'qwerty'}
+{'name': 'Стулья'}
+{'name': 'Люстра'}
+{'name': 'kukaracha'}
+{'name': 'Стулья'}
+{'name': '123'}
+{'name': 'Ваза'}
+{'name': 'GTGT'}
+{'name': 'Стулья'}
+{'name': 'Люстра'}
+{'name': 'Ваза'}
+{'name': 'kukaracha'}
+{'name': 'Стулья'}
+{'name': '123'}
+{'name': 'Люстра'}
+{'name': 'Ваза'}
+{'name': 'kukaracha'}
+{'name': 'kukaracha'}
+{'name': 'kukaracha'}
+{'name': 'Стулья'}
+{'name': 'Люстра'}
+{'name': '123QQQ'}
+{'name': 'RRRRRR'}
+{'name': 'kukaracha'}
+{'name': 'Стулья'}
+{'name': 'ЛюстраYYYY'}
+{'name': 'ВазаHHH'}
+{'name': 'kukaracha'}
+{'name': 'Стулья'}
+{'name': 'QWER123'}
+{'name': 'SDSD'}
+{'name': 'Стулья'}
+{'name': 'NEW 11'}
+{'name': 'NEW 22'}
+{'name': 'NEW 33'}
+{'name': 'kukaracha'}
+{'name': 'Вазаneq'}
+{'name': 'Вазаneq'}
+{'name': 'Вазаneq'}
+{'name': 'Вазаneq'}
+{'name': 'Вазаneq'}
+{}
+{'name': 'Стулья'}
+{'name': 'NEW 11'}
+{'name': 'NEW 22'}
+{'name': 'NEW 33'}
+{'name': 'kukaracha'}
+{'name': 'NEW123'}
+{'name': '123jjjjjj'}
+{'name': 'NEW 11'}
+{'name': 'Стулья'}
+{'name': 'Люстра'}
+{'name': 'Ваза'}
+{'name': 'QWER123'}
+{'course_name': 'Ваза', 'client_name': 'QWER123'}
+{'course_name': 'Люстра', 'client_name': 'QWER123'}
+{'course_name': 'Стулья', 'client_name': 'QWER123'}
+{'name': 'Стулья'}
+{'name': 'Люстра'}
+{'name': '123'}
+{'name': 'kukaracha'}
+{'course_name': 'Люстра', 'client_name': 'kukaracha'}
+{'course_name': '123', 'client_name': 'kukaracha'}
+{'name': 'Стулья'}
+{'name': 'Люстра'}
+{'name': 'Ваза'}
+{'name': '123'}
+{'name': 'kukaracha'}
+{'course_name': 'Люстра', 'client_name': 'kukaracha'}
+{'course_name': '123', 'client_name': 'kukaracha'}
+{'course_name': '123', 'client_name': 'kukaracha'}
+{'course_name': '123', 'client_name': 'kukaracha'}
+{'course_name': '123', 'client_name': 'kukaracha'}
+{'course_name': '123', 'client_name': 'kukaracha'}
+{'course_name': '123', 'client_name': 'kukaracha'}
+{'course_name': '123', 'client_name': 'kukaracha'}
+{'name': 'Стулья'}
+{'name': 'Люстра'}
+{'name': 'Ваза'}
+{'name': '123'}
+{'name': 'kukaracha'}
+{'name': 'Gtfo'}
+{'course_name': 'Люстра', 'client_name': 'kukaracha'}
+{'course_name': 'Ваза', 'client_name': 'kukaracha'}
+{'course_name': 'Ваза', 'client_name': 'Gtfo'}
+{'course_name': '123', 'client_name': 'Gtfo'}
+{'client_name': 'kukaracha', 'course_name': 'Люстра'}
+{'client_name': 'kukaracha', 'course_name': '123'}
+{'client_name': 'Gtfo', 'course_name': 'Ваза'}

@@ -1,12 +1,17 @@
 import copy
 import quopri
+from patterns.behavioral_patterns import FileScriber, Person
 
 
 class Human:
     """
     Класс - Потенциальный пользователь
     """
-    pass
+    def __init__(self, name):
+        """
+        :param name:
+        """
+        self.name = name
 
 
 class Coach(Human):
@@ -20,7 +25,12 @@ class Client(Human):
     """
     Класс - Клиент
     """
-    pass
+    def __init__(self, name):
+        """
+        :param name:
+        """
+        self.courses = []
+        super().__init__(name)
 
 
 class HumanFactory:
@@ -33,12 +43,13 @@ class HumanFactory:
     }
     
     @classmethod
-    def create(cls, type_):
+    def create(cls, type_, name):
         """
         :param type_:
+        :param name:
         :return:
         """
-        return cls.types[type_]()
+        return cls.types[type_](name)
 
 
 # Порождающий паттерн - Прототип
@@ -50,7 +61,7 @@ class Prototype:
         return copy.deepcopy(self)
 
 
-class MiCourse(Prototype):
+class MiCourse(Prototype, Person):
     """
     Класс - Курс
     """
@@ -58,6 +69,20 @@ class MiCourse(Prototype):
         self.name = name
         self.category = category
         self.category.courses.append(self)
+        self.clients = []
+        super().__init__()
+
+    def __getitem__(self, item):
+        """
+        :param item:
+        :return:
+        """
+        return self.clients[item]
+
+    def add_client(self, client: Client):
+        self.clients.append(client)
+        client.courses.append(self)
+        self.notify()
 
 
 class IntMiCourse(MiCourse):
@@ -129,12 +154,13 @@ class Engine:
         self.categories = []
 
     @staticmethod
-    def create_human(type_):
+    def create_human(type_, name):
         """
         :param type_:
+        :param name:
         :return:
         """
-        return HumanFactory.create(type_)
+        return HumanFactory.create(type_, name)
 
     @staticmethod
     def create_category(name, category=None):
@@ -176,6 +202,15 @@ class Engine:
                 return item
         return None
 
+    def get_client(self, name) -> Client:
+        """
+        :param name:
+        :return:
+        """
+        for item in self.clients:
+            if item.name == name:
+                return item
+
     @staticmethod
     def decode_value(val):
         """
@@ -192,10 +227,21 @@ class SingletonByName(type):
     Класс - Порождающий паттерн Синглтон
     """
     def __init__(cls, name, bases, attrs, **kwargs):
+        """
+        :param name:
+        :param bases:
+        :param attrs:
+        :param kwargs:
+        """
         super().__init__(name, bases, attrs)
         cls.__instance = {}
 
     def __call__(cls, *args, **kwargs):
+        """
+        :param args:
+        :param kwargs:
+        :return:
+        """
         if args:
             name = args[0]
         if kwargs:
@@ -212,13 +258,18 @@ class Logger(metaclass=SingletonByName):
     """
     Класс - Логгер
     """
-    def __init__(self, name):
+    def __init__(self, name, writer=FileScriber()):
+        """
+        :param name:
+        :param writer:
+        """
         self.name = name
-
-    @staticmethod
-    def log(text):
+        self.writer = writer
+    
+    def log(self, text):
         """
         :param text:
         :return:
         """
-        print('log ==>', text)
+        text = f'log: {text}'
+        self.writer.write(text)

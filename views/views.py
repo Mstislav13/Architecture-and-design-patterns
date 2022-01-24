@@ -2,9 +2,13 @@ from datetime import date
 from mst_frameworks.template import open_template
 from patterns.create_patterns import Engine, Logger
 from patterns.structur_patterns import MyRouter, Debug
+from patterns.behavioral_patterns import SmsNotifier, EmailNotifier, \
+    PrimarySerializer, ScrollView, BuildView
 
 site_page = Engine()
 logger = Logger('main')
+sms_note = SmsNotifier()
+email_note = EmailNotifier()
 
 routes = {}
 
@@ -87,6 +91,10 @@ class CreateMyCourse:
             if self.cat_id != -1:
                 category = site_page.find_category_id(int(self.cat_id))
                 course = site_page.create_my_course('record', name, category)
+                
+                course.observers.append(email_note)
+                course.observers.append(sms_note)
+
                 site_page.courses.append(course)
             return '200 OK', open_template('course_list.html',
                                             objects_list=category.courses,
@@ -197,3 +205,74 @@ class CourseCopy:
                                     name=next_course.category.name)
         except KeyError:
             return '200 OK', 'Курсы еще не добавлены'
+
+
+@MyRouter(routes=routes, url='/create-client/')
+class CreateClient(BuildView):
+    """
+    Создание нового клиента
+    """
+    template_name = 'create_client.html'
+
+    def create_obj(self, data: dict):
+        """   
+        :param data:
+        :return:
+        """
+        name = data['name']
+        name = site_page.decode_value(name)
+        new_obj = site_page.create_human('client', name)
+        site_page.clients.append(new_obj)
+
+
+@MyRouter(routes=routes, url='/add-client/')
+class AddClient(BuildView):
+    """
+    Добавление клиента на курс
+    """
+    template_name = 'add_client.html'
+
+    def get_context_data(self):
+        """        
+        :return:
+        """
+        context = super().get_context_data()
+        context['courses'] = site_page.courses
+        context['clients'] = site_page.clients
+        return context
+
+    def create_obj(self, data: dict):
+        """
+        :param data:
+        :return:
+        """
+        course_name = data['course_name']
+        course_name = site_page.decode_value(course_name)
+        course = site_page.get_my_course(course_name)
+        client_name = data['client_name']
+        client_name = site_page.decode_value(client_name)
+        client = site_page.get_client(client_name)
+        course.add_client(client)
+
+
+@MyRouter(routes=routes, url='/client_list/')
+class ClientList(ScrollView):
+    """
+    Список клиентов
+    """
+    queryset = site_page.clients
+    template_name = 'client_list.html'
+
+
+@MyRouter(routes=routes, url='/api/')
+class CourseApi:
+    """
+    Api
+    """
+    @Debug(name='CourseApi')
+    def __call__(self, request):
+        """
+        :param request:
+        :return:
+        """
+        return '200 OK', PrimarySerializer(site_page.courses).save()
