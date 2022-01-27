@@ -1,6 +1,8 @@
 import copy
 import quopri
 from patterns.behavioral_patterns import FileScriber, Person
+from patterns.architect_system_pattern import ThingDomain
+from sqlite3 import connect
 
 
 class Human:
@@ -21,7 +23,7 @@ class Coach(Human):
     pass
 
 
-class Client(Human):
+class Client(Human, ThingDomain):
     """
     Класс - Клиент
     """
@@ -273,3 +275,155 @@ class Logger(metaclass=SingletonByName):
         """
         text = f'log: {text}'
         self.writer.write(text)
+
+
+class ClientMapper:
+    """
+    Mapper
+    """
+    def __init__(self, connection):
+        """
+        :param connection: 
+        """
+        self.connection = connection
+        self.cursor = connection.cursor()
+        self.tablename = 'client'
+
+    def collection(self):
+        """
+        :return:
+        """
+        statement = f'SELECT * FROM {self.tablename}'
+        self.cursor.execute(statement)
+        result = []
+        for item in self.cursor.fetchall():
+            id, name = item
+            client = Client(name)
+            client.id = id
+            result.append(client)
+        return result
+
+    def search_by_id(self, id):
+        """
+        :param id:
+        :return:
+        """
+        statement = f"SELECT id, name FROM {self.tablename} WHERE id=?"
+        self.cursor.execute(statement, (id,))
+        result = self.cursor.fetchone()
+        if result:
+            return Client(*result)
+        else:
+            raise EggogNotRecord(f'record with id={id} not found')
+
+    def data_insert(self, obj):
+        """
+        :param obj:
+        :return:
+        """
+        statement = f"INSERT INTO {self.tablename} (name) VALUES (?)"
+        self.cursor.execute(statement, (obj.name,))
+        try:
+            self.connection.commit()
+        except Exception as e:
+            raise EggogCommitDb(e.args)
+
+    def data_update(self, obj):
+        """
+        :param obj:
+        :return:
+        """
+        statement = f"UPDATE {self.tablename} SET name=? WHERE id=?"
+
+        self.cursor.execute(statement, (obj.name, obj.id))
+        try:
+            self.connection.commit()
+        except Exception as e:
+            raise EggogUpdateDb(e.args)
+
+    def data_delete(self, obj):
+        """
+        :param obj:
+        :return:
+        """
+        statement = f"DELETE FROM {self.tablename} WHERE id=?"
+        self.cursor.execute(statement, (obj.id,))
+        try:
+            self.connection.commit()
+        except Exception as e:
+            raise EggogDeleteDb(e.args)
+
+connection = connect('site_bd.sqlite')
+
+
+# Архитектурный системный паттерн - Data Mapper
+class MapperRegistry:
+    """
+    Класс - Mapper
+    """
+    mappers = {
+        'client': ClientMapper,
+        #'category': CategoryMapper
+    }
+
+    @staticmethod
+    def get_mapper(obj):
+        """
+        :param obj:
+        :return:
+        """
+        if isinstance(obj, Client):
+
+            return ClientMapper(connection)
+
+    @staticmethod
+    def get_current_mapper(name):
+        """
+        :param name:
+        :return:
+        """
+        return MapperRegistry.mappers[name](connection)
+
+
+class EggogCommitDb(Exception):
+    """
+    Класс - Eggog Commit
+    """
+    def __init__(self, message):
+        """
+        :param message:
+        """
+        super().__init__(f'Ошибка фиксации БД: {message}')
+
+
+class EggogUpdateDb(Exception):
+    """
+    Класс - Eggog Update
+    """
+    def __init__(self, message):
+        """
+        :param message:
+        """
+        super().__init__(f'Ошибка обновления БД: {message}')
+
+
+class EggogDeleteDb(Exception):
+    """
+    Класс - Eggog Delete
+    """
+    def __init__(self, message):
+        """
+        :param message:
+        """
+        super().__init__(f'Ошибка удаления БД: {message}')
+
+
+class EggogNotRecord(Exception):
+    """
+    Класс - Eggog Record
+    """
+    def __init__(self, message):
+        """
+        :param message:
+        """
+        super().__init__(f'Запись не найдена: {message}')

@@ -1,6 +1,9 @@
 <div id="content">
     <div>
         <li>
+            <a href="/">Назад на главную</a>
+        </li>
+        <li>
             <a href="/create-client/">Создать клиента</a>
         </li>
         <li>
@@ -12,11 +15,11 @@
         {% for item in objects_list %}
         <li>
             <span>Клиент: {{item.name}}.</span>
-            <span>Записан на курсы:
+            <!-- <span>Записан на курсы:
                 {% for course in item.courses %}
                 {{course.name}}.
                 {% endfor %}
-            </span>
+            </span> -->
         </li>
         {% endfor %}
     </div>

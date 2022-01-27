@@ -1,14 +1,17 @@
 from datetime import date
 from mst_frameworks.template import open_template
-from patterns.create_patterns import Engine, Logger
+from patterns.create_patterns import Engine, Logger, MapperRegistry
 from patterns.structur_patterns import MyRouter, Debug
 from patterns.behavioral_patterns import SmsNotifier, EmailNotifier, \
     PrimarySerializer, ScrollView, BuildView
+from patterns.architect_system_pattern import UnitOfWork
 
 site_page = Engine()
 logger = Logger('main')
 sms_note = SmsNotifier()
 email_note = EmailNotifier()
+UnitOfWork.new_current()
+UnitOfWork.get_current().mapper_registry(MapperRegistry)
 
 routes = {}
 
@@ -223,6 +226,8 @@ class CreateClient(BuildView):
         name = site_page.decode_value(name)
         new_obj = site_page.create_human('client', name)
         site_page.clients.append(new_obj)
+        new_obj.mark_new()
+        UnitOfWork.get_current().commit()
 
 
 @MyRouter(routes=routes, url='/add-client/')
@@ -260,8 +265,14 @@ class ClientList(ScrollView):
     """
     Список клиентов
     """
-    queryset = site_page.clients
     template_name = 'client_list.html'
+
+    def get_queryset(self):
+        """
+        :return:
+        """
+        mapper = MapperRegistry.get_current_mapper('client')
+        return mapper.collection()
 
 
 @MyRouter(routes=routes, url='/api/')

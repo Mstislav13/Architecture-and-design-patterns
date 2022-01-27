@@ -4,6 +4,10 @@ from mst_frameworks.requests import Get, Post
 
 class Page_404:
     def __call__(self, request):
+        """        
+        :param request: 
+        :return: 
+        """
         return '404 WHAT', '404 Page not Fоund'
 
 
@@ -11,10 +15,19 @@ class MainFramework:
     """Класс MainFramework - основа фреймворка"""
 
     def __init__(self, routes_obj, fronts_obj):
+        """
+        :param routes_obj: 
+        :param fronts_obj: 
+        """
         self.routes_lst = routes_obj
         self.fronts_lst = fronts_obj
 
     def __call__(self, environ, start_response):
+        """
+        :param environ: 
+        :param start_response: 
+        :return: 
+        """
         # Получаем адрес(путь), по которому выполнен переход
         addr = environ['PATH_INFO']
 
