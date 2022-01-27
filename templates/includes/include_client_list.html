@@ -1,0 +1,26 @@
+<div id="content">
+    <div>
+        <li>
+            <a href="/">Назад на главную</a>
+        </li>
+        <li>
+            <a href="/create-client/">Создать клиента</a>
+        </li>
+        <li>
+            <a href="/add-client/">Добавить клиента на курс</a>
+        </li>
+    </div>
+    <h1>Список клиентов:</h1>
+    <div class="client_list">
+        {% for item in objects_list %}
+        <li>
+            <span>Клиент: {{item.name}}.</span>
+            <!-- <span>Записан на курсы:
+                {% for course in item.courses %}
+                {{course.name}}.
+                {% endfor %}
+            </span> -->
+        </li>
+        {% endfor %}
+    </div>
+</div>
